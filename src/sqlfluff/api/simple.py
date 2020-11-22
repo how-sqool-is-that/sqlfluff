@@ -32,8 +32,10 @@ def lint(sql, dialect="ansi", rules=None):
 
     result = linter.lint_string_wrapped(sql)
     result_records = result.as_records()
-    # Return just the violations for this file
-    return result_records[0]["violations"]
+
+    violations = result_records[0]["violations"] if result_records else None
+    
+    return violations
 
 
 def fix(sql, dialect="ansi", rules=None):
